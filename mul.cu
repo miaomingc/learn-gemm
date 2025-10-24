@@ -18,7 +18,7 @@ __global__ void generate_random(float *array, int n, unsigned seed)
 }
 void cpu_mult(float *a, float *b, float *c, size_t m, size_t n, size_t p)
 {
-#pragma omp paraller
+#pragma omp parallel
     {
         if (omp_get_thread_num() == 0)
         {
@@ -31,7 +31,7 @@ void cpu_mult(float *a, float *b, float *c, size_t m, size_t n, size_t p)
                 c[i * p + j] = 0;
                 for (int k = 0; k < n; k++)
                 {
-                    c[i * p + j] = a[i * n + k] * b[k * p + j];
+                    c[i * p + j] += a[i * n + k] * b[k * p + j];
                 }
             }
         }
