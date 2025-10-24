@@ -28,11 +28,12 @@ void cpu_mult(float *a, float *b, float *c, size_t m, size_t n, size_t p)
         {
             for (int j = 0; j < p; j++)
             {
-                c[i * p + j] = 0;
+                float sum = 0;
                 for (int k = 0; k < n; k++)
                 {
-                    c[i * p + j] += a[i * n + k] * b[k * p + j];
+                    sum += a[i * n + k] * b[k * p + j];
                 }
+                c[i * p + j] = sum;
             }
         }
     }
